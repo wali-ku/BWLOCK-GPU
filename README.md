@@ -15,7 +15,6 @@ our ECRTS-18 paper:
 + Matplotlib
 
 # Directory Structure
-* [root: This directory]( .)
   * [kernel: Placeholder directory for hosting Linux for Tegra kernel]( ./kernel)
      * [miscs: Contains required kernel patches]( ./kernel/miscs)
        * [diffs]( ./kernel/miscs/diffs)
