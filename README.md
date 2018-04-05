@@ -12,6 +12,7 @@ our ECRTS-18 paper:
 + CUDA Runtime Library (Version-8.0)
 + Linux for Tegra (Version 28.1)
 + Python (Version 2.7)
++ Git
 + Matplotlib
 
 # Directory Structure
