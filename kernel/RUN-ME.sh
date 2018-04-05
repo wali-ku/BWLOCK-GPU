@@ -5,6 +5,8 @@
 # 	- Patch the kernel with BWLOCK++
 # 	- Build the kernel and all the modules
 # 	- Copy the kernel image to /boot/ directory (CAUTION!!!)
+#
+# Author:	Waqar Ali (wali@ku.edu)
 
 . ./functions.sh
 

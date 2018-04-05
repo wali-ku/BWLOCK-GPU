@@ -1,12 +1,17 @@
 #!/bin/bash
 # Helper bash functions for building Linux for Tegra 28.1 kernel on TX-2
-# CREDIT: The script has been adpated from:
-# 	  https://github.com/jetsonhacks/buildJetsonTX2Kernel.git
+#
+# Author:	Waqar Ali (wali@ku.edu)
+#
+# ACKNOWLEDGMENT
+# Parts of this script have been adpated from:
+# 	https://github.com/jetsonhacks/buildJetsonTX2Kernel.git
 
 # Declare colors for pretty output
 RED='\033[0;31m'
 GRN='\033[0;32m'
 YLW='\033[0;33m'
+CYN='\033[0;36m'
 NCL='\033[0m'
 
 get_kernel_sources () {

@@ -1,9 +1,7 @@
+# A simple makefile to build the shared library for intercepting CUDA Runtime
+# API calls via LD_PRELOAD
 #
-# FILE		: Makefile
-#
-# Description	: A simple makefile to demonstrate the use of LD_PRELOAD
-# 	          trick
-#
+# Author	: Waqar Ali (wali@ku.edu)
 
 RED   :='\033[0;31m'
 GRN   :='\033[0;32m'

@@ -1,9 +1,7 @@
-##
-# FILE		: Makefile
+# This Makefile builds bwlockmod kernel module.  The generated executables are
+# placed in the 'exe' directory
 #
-# BRIEF		: This Makefile builds bwlockmod kernel module.
-#		  The generated executables are placed in the 'exe' directory
-##
+# Auhtor	: Waqar Ali (wali@ku.edu)
 
 TOP_DIR 	:= $(shell pwd)
 MOD_EXE 	:= $(TOP_DIR)/bwlockmod.ko

@@ -1,16 +1,12 @@
-/*
- * FILE		: custom_cuda.c
+/* This files contains wrappers for some of the CUDA runtime API rotuines. It
+ * should be compiled as a shared library and used via LD_PRELOAD to capture
+ * calls to CUDA runtime API invocations of a GPU application
  *
- * BRIEF	: This files contains wrappers for some of the CUDA runtime
- * 		  API rotuines. It should be compiled as a shared library and
- * 		  used via LD_PRELOAD to capture calls to CUDA runtime API
- * 		  invocations of a GPU application
- *
- * AUTHOR	: Waqar Ali (https://github.com/Skidro)
+ * Author	: Waqar Ali (wali@ku.edu)
  *
  * ACKNOWLEDGEMENT
  * The code in the following git repository was used to aid in this effort:
- * https://github.com/nchong/cudahook
+ * 	https://github.com/nchong/cudahook
  */
 
 #include <stdbool.h>

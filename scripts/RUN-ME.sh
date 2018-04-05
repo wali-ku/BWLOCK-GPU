@@ -42,6 +42,8 @@
 # * [STEP-7] Fig-10
 #
 # [STEP-8] Data categorization and plotting
+#
+# Author	: Waqar Ali (wali@ku.edu)
 
 . ./functions.sh
 scenario=raw_data
