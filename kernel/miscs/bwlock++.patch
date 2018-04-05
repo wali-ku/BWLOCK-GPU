@@ -1,0 +1,123 @@
+diff -ruN linux/include/linux/sched.h /ssd/work/linux/kernel/kernel-4.4/include/linux/sched.h
+--- linux/include/linux/sched.h	2017-07-20 07:41:24.000000000 +0000
++++ /ssd/work/linux/kernel/kernel-4.4/include/linux/sched.h	2018-01-13 14:52:14.966137561 +0000
+@@ -1416,6 +1416,10 @@
+ #endif
+ 	struct sched_dl_entity dl;
+ 
++	/* BWLOCK++ Related Fields */
++	int bwlock_val;
++	int bw_old_prio;
++
+ #ifdef CONFIG_PREEMPT_NOTIFIERS
+ 	/* list of struct preempt_notifier: */
+ 	struct hlist_head preempt_notifiers;
+diff -ruN linux/include/linux/syscalls.h /ssd/work/linux/kernel/kernel-4.4/include/linux/syscalls.h
+--- linux/include/linux/syscalls.h	2017-07-20 07:41:24.000000000 +0000
++++ /ssd/work/linux/kernel/kernel-4.4/include/linux/syscalls.h	2018-01-13 14:53:36.237525103 +0000
+@@ -871,7 +871,7 @@
+ 				      const struct iovec __user *rvec,
+ 				      unsigned long riovcnt,
+ 				      unsigned long flags);
+-
++asmlinkage long sys_bwlock(pid_t pid, int val);
+ asmlinkage long sys_kcmp(pid_t pid1, pid_t pid2, int type,
+ 			 unsigned long idx1, unsigned long idx2);
+ asmlinkage long sys_finit_module(int fd, const char __user *uargs, int flags);
+diff -ruN linux/include/uapi/asm-generic/unistd.h /ssd/work/linux/kernel/kernel-4.4/include/uapi/asm-generic/unistd.h
+--- linux/include/uapi/asm-generic/unistd.h	2017-07-20 07:41:24.000000000 +0000
++++ /ssd/work/linux/kernel/kernel-4.4/include/uapi/asm-generic/unistd.h	2018-01-13 14:55:18.405155497 +0000
+@@ -662,6 +662,9 @@
+  */
+ #define __NR_arch_specific_syscall 244
+ 
++#define __NR_bwlock 245
++__SYSCALL(__NR_bwlock, sys_bwlock)
++
+ #define __NR_wait4 260
+ __SC_COMP(__NR_wait4, sys_wait4, compat_sys_wait4)
+ #define __NR_prlimit64 261
+diff -ruN linux/kernel/sched/core.c /ssd/work/linux/kernel/kernel-4.4/kernel/sched/core.c
+--- linux/kernel/sched/core.c	2017-07-20 07:41:24.000000000 +0000
++++ /ssd/work/linux/kernel/kernel-4.4/kernel/sched/core.c	2018-01-13 16:16:30.782510719 +0000
+@@ -4213,6 +4213,68 @@
+ 	return -E2BIG;
+ }
+ 
++/*
++ * nr_bwlocked_cores
++ * Calculate the number of currently bandwidth locked cores
++ */
++int nr_bwlocked_cores(void)
++{
++	unsigned long i;
++	int sum = 0;
++
++	/* Iterate over each online core */
++	for_each_online_cpu(i)
++		sum += cpu_rq(i)->curr->bwlock_val;
++
++	/* Return the number to caller */
++	return sum;
++}
++
++/* Add bandwidth lock specific declarations here */
++EXPORT_SYMBOL(nr_bwlocked_cores);
++
++/*
++ * sys_bwlock - Memory bandwidth control lock. Provides exclusive access to
++ * main memory to the holder. Holder must be a real-time task
++ *
++ * @pid	: pid of the process which wants to hold bandwidth lock
++ * @val : bwlock value 0 - unlock | 1 - lock
++ */
++SYSCALL_DEFINE2(bwlock, pid_t, pid, int, val)
++{
++	struct task_struct *p;
++	struct sched_param param;
++
++	/* Obtain the task structure associated with the process
++	   referenced by pid */
++	if (pid == 0 || current->pid == pid)
++		p = current;
++	else
++		p = find_process_by_pid (pid);
++
++	/* Process does not exist or it is not a real-time process */
++	if (!p || !rt_task (p))
++		return -1;
++
++	if (val == 0) {
++		/* Release the lock and restore the old priority of the task */
++		param.sched_priority = p->bw_old_prio;
++		p->bwlock_val = 0;
++		p->bw_old_prio = 0;
++		sched_setscheduler_nocheck(p, -1, &param);
++	} else {
++		/* Acquire bwlock and raise the priority of the requester to the
++		   system max */
++		param.sched_priority = MAX_USER_RT_PRIO - 1;
++		p->bw_old_prio = p->rt_priority;
++		p->bwlock_val = 1;
++		sched_setscheduler_nocheck(p, -1, &param);
++	}
++
++	/* Return with success */
++	return 0;
++}
++
+ /**
+  * sys_sched_setscheduler - set/change the scheduler policy and RT priority
+  * @pid: the pid in question.
+diff -ruN linux/Makefile /ssd/work/linux/kernel/kernel-4.4/Makefile
+--- linux/Makefile	2017-07-20 07:41:19.000000000 +0000
++++ /ssd/work/linux/kernel/kernel-4.4/Makefile	2018-01-13 15:07:26.491375811 +0000
+@@ -1,7 +1,7 @@
+ VERSION = 4
+ PATCHLEVEL = 4
+ SUBLEVEL = 38
+-EXTRAVERSION =
++EXTRAVERSION = -BWv1.0
+ NAME = Blurry Fish Butt
+ 
+ # *DOCUMENTATION*

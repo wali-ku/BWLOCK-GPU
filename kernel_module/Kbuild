@@ -1,0 +1,2 @@
+obj-m := bwlockmod.o 
+bwlockmod-objs := src/bwlockmod.o src/perf.o src/interrupt.o src/overflow.o src/control.o
