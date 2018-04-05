@@ -1,11 +1,12 @@
 # Introduction
 This repository contains all the scripts needed to reproduce experiments from
 our ECRTS-18 paper:
+
 **Protecting Real-Time GPU Kernels on Integrated CPU-GPU SoC Platforms**
 
 # Pre-requisites
 ### Hardware
-+ NVIDA Jetson TX-2 Board
++ NVIDIA Jetson TX-2 Board
 + SSD (Optional)
 
 ### Software
