@@ -16,23 +16,22 @@ our ECRTS-18 paper:
 + Matplotlib
 
 # Directory Structure
-.
- *[kernel]( ./kernel)
-   *[miscs]( ./kernel/miscs)
-   *[diffs]( ./kernel/miscs/diffs)
-   *[devfreq]( ./kernel/miscs/diffs/devfreq)
-   *[nvgpu]( ./kernel/miscs/diffs/nvgpu)
-   *[tegra-alt]( ./kernel/miscs/diffs/tegra-alt)
- *[dynamic_linker]( ./dynamic_linker)
-   *[lib]( ./dynamic_linker/lib)
- *[kernel_module]( ./kernel_module)
-   *[test]( ./kernel_module/test)
-     *[rt_test]( ./kernel_module/test/rt_test)
-   *[src]( ./kernel_module/src)
- *[benchmarks]( ./benchmarks)
- *[scripts]( ./scripts)
-     *[graph_scripts]( ./scripts/graph_scripts)
-     *[individual_figures]( ./scripts/individual_figures)
+  * [kernel: Placeholder directory for hosting Linux for Tegra kernel]( ./kernel)
+     * [miscs: Contains required kernel patches]( ./kernel/miscs)
+       * [diffs]( ./kernel/miscs/diffs)
+       * [devfreq]( ./kernel/miscs/diffs/devfreq)
+       * [nvgpu]( ./kernel/miscs/diffs/nvgpu)
+       * [tegra-alt]( ./kernel/miscs/diffs/tegra-alt)
+   * [dynamic_linker: Contains shared library code for intercepting CUDA Runtime API calls]( ./dynamic_linker)
+     * [lib]( ./dynamic_linker/lib)
+   * [kernel_module: Contains source code of BWLOCK++ kernel module]( ./kernel_module)
+     * [test]( ./kernel_module/test)
+       * [rt_test]( ./kernel_module/test/rt_test)
+     * [src]( ./kernel_module/src)
+   * [benchmarks: Placeholder directory for hosting benchmarks]( ./benchmarks)
+   * [scripts: Contains bash and python scripts for automatically running BWLOCK++ experiments]( ./scripts)
+       * [graph_scripts]( ./scripts/graph_scripts)
+       * [individual_figures]( ./scripts/individual_figures)
 
 # Setup
 We recommend that the TX-2 be flashed with Jetpack-3.0 before proceeding with
