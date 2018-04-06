@@ -87,8 +87,9 @@ cd scripts
 ```bash
 apt-get install python-matplotlib
 ```
-12. **Reboot the system**. Once the system reboots, go the directory containing *BWLOCK-GPU/scripts*. Then put the board into maximum performance state using this script [script]( ./scripts/max_perf.sh)
+12. **Reboot the system**. Once the system reboots, go the directory containing *BWLOCK-GPU/scripts*. Relaunch sudo shell and then put the board into maximum performance state using this script [script]( ./scripts/max_perf.sh)
 ```bash
+sudo bash
 ./max_perf.sh
 ```
 
