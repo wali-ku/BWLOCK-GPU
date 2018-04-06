@@ -55,7 +55,7 @@ sudo bash
 
 4. Install BWLOCK++ patched kernel on board (Long Operation). All the steps required to do so are automated in this [script]( ./kernel/RUN-ME.sh)
 ```bash
-cd BWLOCK-GPU/linux
+cd BWLOCK-GPU/kernel
 ./RUN-ME.sh
 ```
 
