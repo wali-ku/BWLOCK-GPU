@@ -7,7 +7,6 @@ our ECRTS-18 paper:
 # Pre-requisites
 ### Hardware
 + NVIDIA Jetson TX-2 Board
-+ SSD (Optional)
 
 ### Software
 + CUDA Runtime Library (Version-8.0)
@@ -35,8 +34,7 @@ our ECRTS-18 paper:
        * [individual_figures]( ./scripts/individual_figures)
 
 # Step-by-step Instructions
-We recommend that the TX-2 be flashed with Jetpack-3.1 before proceeding with
-the following steps. All these steps are meant to be executed on the TX-2 board
+We recommend that the TX-2 be flashed with [Jetpack-3.1](https://developer.nvidia.com/embedded/jetpack-3_1) before proceeding with the following steps. All these steps are meant to be executed on the TX-2 board.
 
 1. Launch a bash shell. Install Git
 ```bash
@@ -67,7 +65,7 @@ cd benchmarks
 cd ..
 ```
 
-7. **IMPORTANT** Set root path in [this script]( ./scripts/functions.sh). The root path is defined as the absolute path in your system where the BWLOCK-GPU repostiory is located. For example, in our test sytem, the repository is located at */home/nvidia/BWLOCK-GPU* which is set as the root path.
+7. **\[IMPORTANT\]** Set root path in [this script]( ./scripts/functions.sh). The root path is defined as the absolute path in your system where the BWLOCK-GPU repostiory is located. For example, in our test sytem, the repository is located at */home/nvidia/BWLOCK-GPU* which is set as the root path.
 
 8. Launch sudo shell
 ```bash
@@ -81,6 +79,10 @@ cd scripts
 ```
 
 10. Put the board into maximum performance state using this script [script]( ./scripts/max_perf.sh)
+```bash
+./max_perf.sh
+```
+
 11. Run the [sanity check experiment]( ./scripts/TEST-BWLOCK.sh) to verify that everything is correctly setup in your system. The script takes ~1-minute to complete.
 ```bash
 ./TEST-BWLOCK.sh
