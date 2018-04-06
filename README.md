@@ -65,7 +65,7 @@ cd benchmarks
 cd ..
 ```
 
-7. **IMPORTANT** Set root path in [this script]( ./scripts/functions.sh). The root path is defined as the absolute path in your system where the BWLOCK-GPU repostiory is located. For example, in our test sytem, the repository is located at */home/nvidia/BWLOCK-GPU* which is set as the root path.
+7. \[**IMPORTANT**\] Set root path in [this script]( ./scripts/functions.sh). The root path is defined as the absolute path in your system where the BWLOCK-GPU repostiory is located. For example, in our test sytem, the repository is located at */home/nvidia/BWLOCK-GPU* which is set as the root path.
 
 8. Launch sudo shell
 ```bash
