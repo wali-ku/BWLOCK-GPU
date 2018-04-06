@@ -12,7 +12,7 @@ C_LIB := $(wildcard lib/*.c)
 S_LIB := custom_cuda.so
 S_APP := test
 CXX   := g++
-I_PTH := /usr/local/cuda-9.0/include
+I_PTH := /usr/local/cuda-8.0/include
 
 all: build
 build: $(S_LIB)
