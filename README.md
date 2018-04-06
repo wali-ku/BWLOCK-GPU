@@ -81,6 +81,10 @@ cd scripts
 ```
 
 10. Put the board into maximum performance state using this script [script]( ./scripts/max_perf.sh)
+```bash
+./max_perf.sh
+```
+
 11. Run the [sanity check experiment]( ./scripts/TEST-BWLOCK.sh) to verify that everything is correctly setup in your system. The script takes ~1-minute to complete.
 ```bash
 ./TEST-BWLOCK.sh
