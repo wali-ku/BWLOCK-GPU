@@ -2,7 +2,7 @@
 root_path=/home/nvidia/BWLOCK-GPU
 corun_path=${root_path}/benchmarks/IsolBench/bench
 parboil_path=${root_path}/benchmarks/parboil
-results_path=${root_path}/sandbox/results
+results_path=${root_path}/scripts/results
 bwlock_mod_path=${root_path}/kernel_module
 dynamic_linker_path=${root_path}/dynamic_linker
 parboil_benchmarks=(	'bfs'		'lbm'		'sad'		'spmv'		'stencil'	'histo'	)
