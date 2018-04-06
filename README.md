@@ -102,6 +102,7 @@ apt-get install python-matplotlib
 
 # Experiments
 **NOTE: Before running the experiments, make sure that the device is in max-performance state**
+
 The scripts present in this repository produce the following figures from the paper:
 + Figure-1
 + Figure-5 (a, b, c)
