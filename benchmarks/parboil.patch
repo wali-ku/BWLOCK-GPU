@@ -108,8 +108,8 @@ diff -ruN '--exclude=.git' parboil/common/Makefile.conf ../Parboil/common/Makefi
 --- parboil/common/Makefile.conf	1970-01-01 00:00:00.000000000 +0000
 +++ ../Parboil/common/Makefile.conf	2018-03-27 23:53:15.413536488 +0000
 @@ -0,0 +1,5 @@
-+CUDA_PATH=/usr/local/cuda-9.0/
-+CUDA_LIB_PATH=/usr/local/cuda-9.0/lib64/
++CUDA_PATH=/usr/local/cuda-8.0/
++CUDA_LIB_PATH=/usr/local/cuda-8.0/lib64/
 +OPENCL_PATH=/usr/local/cuda/
 +OPENCL_LIB_PATH=/usr/lib/
 +
