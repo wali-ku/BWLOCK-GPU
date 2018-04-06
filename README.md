@@ -78,14 +78,14 @@ cd scripts
 ./build_all.sh
 ```
 
-10. Put the board into maximum performance state using this script [script]( ./scripts/max_perf.sh)
-```bash
-./max_perf.sh
-```
-
-11. Run the [sanity check experiment]( ./scripts/TEST-BWLOCK.sh) to verify that everything is correctly setup in your system. The script takes ~1-minute to complete.
+10. Run the [sanity check experiment]( ./scripts/TEST-BWLOCK.sh) to verify that everything is correctly setup in your system. The script takes ~1-minute to complete.
 ```bash
 ./TEST-BWLOCK.sh
+```
+
+11. Put the board into maximum performance state using this script [script]( ./scripts/max_perf.sh)
+```bash
+./max_perf.sh
 ```
 
 12. Given that your system passes the sanity check, BWLOCK++ is ready to be evaluated on it. However, before proceeding with the final script, install the *matplotlib* package which is used by the final script for plotting graphs.
