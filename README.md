@@ -7,7 +7,6 @@ our ECRTS-18 paper:
 # Pre-requisites
 ### Hardware
 + NVIDIA Jetson TX-2 Board
-+ SSD (Optional)
 
 ### Software
 + CUDA Runtime Library (Version-8.0)
