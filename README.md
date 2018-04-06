@@ -34,8 +34,7 @@ our ECRTS-18 paper:
        * [individual_figures]( ./scripts/individual_figures)
 
 # Step-by-step Instructions
-We recommend that the TX-2 be flashed with Jetpack-3.1 before proceeding with
-the following steps. All these steps are meant to be executed on the TX-2 board
+We recommend that the TX-2 be flashed with [Jetpack-3.1](https://developer.nvidia.com/embedded/jetpack-3_1) before proceeding with the following steps. All these steps are meant to be executed on the TX-2 board.
 
 1. Launch a bash shell. Install Git
 ```bash
