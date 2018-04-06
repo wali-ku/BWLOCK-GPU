@@ -1,5 +1,5 @@
 # Utility functions for BWLOCK++ evaluation
-root_path=/ssd/work/bwlock_eval
+root_path=/home/nvidia/BWLOCK-GPU
 corun_path=${root_path}/benchmarks/IsolBench/bench
 parboil_path=${root_path}/benchmarks/parboil
 results_path=${root_path}/sandbox/results
