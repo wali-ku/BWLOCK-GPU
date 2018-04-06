@@ -18,3 +18,5 @@ extract_parboil
 
 echo -e "${CYN}***** Step [4/4]${NCL}"
 patch_parboil
+
+echo -e "${CYN}***** Benchmark setup complete!${NCL}"
