@@ -34,9 +34,30 @@ our ECRTS-18 paper:
        * [graph_scripts]( ./scripts/graph_scripts)
        * [individual_figures]( ./scripts/individual_figures)
 
-# Setup
-We recommend that the TX-2 be flashed with Jetpack-3.0 before proceeding with
-the following steps.
+# Step-by-step Instructions
+We recommend that the TX-2 be flashed with Jetpack-3.1 before proceeding with
+the following steps. All these steps are meant to be executed on the TX-2 board
+
+1. Launch a bash shell. Install Git
+```bash
+sudo apt-get install git
+```
+
+2. Clone this repository
+```bash
+git clone https://github.com/Skidro/BWLOCK-GPU.git
+```
+
+3. Launch a sudo shell
+```
+sudo bash
+```
+
+4. Install BWLOCK++ patched kernel on board (Long Operation). All the steps required to do so are automated in this [script]( ./kernel/RUN-ME.sh)
+```bash
+cd BWLOCK-GPU/linux
+./RUN-ME.sh
+```
 
 # Experiments
 **NOTE: Before running the experiments, make sure that the device is in max-performance state**
