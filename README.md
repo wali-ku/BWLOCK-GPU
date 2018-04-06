@@ -83,14 +83,13 @@ cd scripts
 ./TEST-BWLOCK.sh
 ```
 
-11. Put the board into maximum performance state using this script [script]( ./scripts/max_perf.sh)
-```bash
-./max_perf.sh
-```
-
-12. Given that your system passes the sanity check, BWLOCK++ is ready to be evaluated on it. However, before proceeding with the final script, install the *matplotlib* package which is used by the final script for plotting graphs.
+11. Given that your system passes the sanity check, BWLOCK++ is ready to be evaluated on it. However, before proceeding with the final script, install the *matplotlib* package which is used by the final script for plotting graphs.
 ```bash
 apt-get install python-matplotlib
+```
+12. **Reboot the system**. Once the system reboots, go the directory containing *BWLOCK-GPU/scripts*. Then put the board into maximum performance state using this script [script]( ./scripts/max_perf.sh)
+```bash
+./max_perf.sh
 ```
 
 13. Run the [final evaluation script]( ./scripts/RUN-ME.sh) which runs all the experiments from our paper (Protecting Real-Time GPU Kernels on Integrated CPU-GPU SoC Platforms). This will take significant amount of time (Approximately 2 to 3 hours).
