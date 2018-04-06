@@ -207,11 +207,8 @@ setup_bwlock () {
 }
 
 # Remove bandwidth lock kernel module. Copy over the trace data and reset trace
-# $1 : Name of experiment scenario. This is used to store the trace buffer in
-#      appropriate folder
 cleanup_bwlock () {
 	rmmod bwlockmod &> /dev/null
-	cp /sys/kernel/debug/tracing/trace ${results_path}/$1/.
 	reset_log
 	sleep 2
 }

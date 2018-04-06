@@ -147,7 +147,7 @@ done
 # Cleanup. Re-arrange data and plot results
 echo -e "${CYN}***** STEP [8/8]${NCL}"
 rm -f bw_mem bw_cpu critical
-cleanup_bwlock ${scenario}
+cleanup_bwlock
 
 # Gather data for Fig-1 (motivation)
 mkdir -p results/motivation
