@@ -7,6 +7,7 @@ scenario=tfs
 cp ${corun_path}/bandwidth bw_mem
 cp ${corun_path}/bandwidth bw_cpu
 
+setup_bwlock 1024 0
 if [ "$1" == "run_the_experiment" ]; then
 	for benchmark_number in `seq 0 $((${#parboil_benchmarks[@]} - 1))`; do
 		name=${parboil_benchmarks[${benchmark_number}]}
@@ -32,10 +33,10 @@ else
 		exit 1
 	fi
 fi
-
+cleanup_bwlock
 rm -f bw_mem bw_cpu
 
 # Create the plot
-# python graph_scripts/${scenario}.py results/${scenario}/
-# mv fig10-${scenario}.pdf figures/.
+python graph_scripts/${scenario}.py results/${scenario}/
+mv fig10-${scenario}.pdf figures/.
 echo -e "${YLW}[STATUS] Execution complete. The plot can now be seen here: figures/fig10-${scenario}.pdf${NCL}"
