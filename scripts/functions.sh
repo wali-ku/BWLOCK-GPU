@@ -8,7 +8,7 @@ dynamic_linker_path=${root_path}/dynamic_linker
 parboil_benchmarks=(	'bfs'		'lbm'		'sad'		'spmv'		'stencil'	'histo'	)
 parboil_compile=(	'cuda_base'	'cuda'		'cuda'		'cuda'		'cuda'		'cuda'	)
 parboil_datasets=(	'1M' 		'long' 		'large' 	'large' 	'default'	'large' )
-parboil_budgets=(	 512 		 256 		 1024 		 8192 		 1024		 1024 	)
+parboil_budgets=(	 512 		 256 		 1024 		 1024 		 1024		 1024 	)
 
 # Declare colors for pretty output
 RED='\033[0;31m'
