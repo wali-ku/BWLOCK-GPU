@@ -108,7 +108,7 @@ cd BWLOCK-GPU/scripts
 14. If everything goes alright, the following directory (*BWLOCK-GPU/scripts/figures/*) should contain all the generated figures.
 
 # Figures Reproduced from Paper
-By following the instructions mentioned [above](https://github.com/Skidro/BWLOCK-GPU#step-by-step-instructions), the following figures from the paper should get generated in (*BWLOCK-GPU/scripts/figures/*) directory:
+By following the instructions mentioned above, the following figures from the paper should get generated in (*BWLOCK-GPU/scripts/figures/*) directory:
 + Figure-1
 + Figure-5 (a, b, c)
 + Figure-6 (a, b, c)
@@ -118,7 +118,7 @@ By following the instructions mentioned [above](https://github.com/Skidro/BWLOCK
 + Figure-10
 
 # Running a Specific Experiment from Paper
-In case, one of the individual figures need to be generated from the figures mentioned [above](https://github.com/Skidro/BWLOCK-GPU#figures-reproduced-from-paper), please use the scripts present in [this folder (individual_figures)]( ./scripts/individual_figures) which is located in the *BWLOCK-GPU/scripts/* directory. In order to do that, either copy the script for the figure you want to reproduce form the directory (*BWLOCK-GPU/scripts/individual_figures/*) to the directory (*BWLOCK-GPU/scripts/*) and then run it OR change the directory to *BWLOCK-GPU/scripts* and execute the script directly from there (As demonstrated below).
+In case, one of the individual figures need to be generated from the figures mentioned above, please use the scripts present in [this folder (individual_figures)]( ./scripts/individual_figures) which is located in the *BWLOCK-GPU/scripts/* directory. In order to do that, either copy the script for the figure you want to reproduce form the directory (*BWLOCK-GPU/scripts/individual_figures/*) to the directory (*BWLOCK-GPU/scripts/*) and then run it OR change the directory to *BWLOCK-GPU/scripts* and execute the script directly from there (As demonstrated below).
 
 **\[NOTE\]** By default, the scripts in *individual_figures* directory will plot the figure with the existing data in *results* directory. However, if the data itself needs to be collected, the script should be run with **run_the_experiment** option.
 
