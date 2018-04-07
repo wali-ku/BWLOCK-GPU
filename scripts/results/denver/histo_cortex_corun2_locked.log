@@ -1,0 +1,19 @@
+Resolving CUDA runtime library...
+	/home/nvidia/BWLOCK-GPU/dynamic_linker/custom_cuda.so (0x0000007fab605000)
+	libcudart.so.8.0 => /usr/local/cuda-8.0/lib64/libcudart.so.8.0 (0x0000007fab5a2000)
+
+IO        : 0.103839
+Kernel    : 94.733534
+ -PreScanKernel      : 16.363500
+ -PostPreMems        : 19.603254
+ -IntermediatesKernel: 16.772395
+ -MainKernel         : 20.568127
+ -FinalKernel        : 21.426211
+Copy      : 0.020657
+Driver    : 94.758450
+Compute   : 0.000734
+CPU/Kernel Overlap: 94.733534
+Timer Wall Time: 95.001816
+Pass
+Parboil parallel benchmark suite, version 0.2
+

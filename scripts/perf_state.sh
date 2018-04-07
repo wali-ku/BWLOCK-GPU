@@ -1,9 +1,9 @@
 #!/bin/sh
-# This script displays the state of various configuration options on the TX2.
+# This script displays the state of various configuration options on the TX1.
 #
 # ACKNOWLEDGMENT
-#	        This script has been adapted from:
-#	        https://github.com/yalue/cuda_scheduling_examiner_mirror/blob/master/scripts/TX-perf_state.sh
+#	This script has been adapted from:
+#	https://github.com/yalue/cuda_scheduling_examiner_mirror/blob/master/scripts/TX-perf_state.sh
 echo "WARNING - Must Be Run Sudo"
 echo "WARNING - Use Only on TX2"
 
@@ -13,8 +13,10 @@ cat /sys/kernel/debug/tegra_fan/target_pwm
 echo "Cores active"
 cat /sys/devices/system/cpu/online
 
-echo "Scaling governors (0, 3, 4, 5)"
+echo "Scaling governors (0, 1, 2, 3, 4, 5)"
 cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+cat /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor
+cat /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor
 cat /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor
 cat /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor
 cat /sys/devices/system/cpu/cpu5/cpufreq/scaling_governor
@@ -22,8 +24,10 @@ cat /sys/devices/system/cpu/cpu5/cpufreq/scaling_governor
 echo "CPU available frequencies"
 cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_frequencies
 
-echo "CPU cycle frequencies (0, 3, 4, 5)"
+echo "CPU cycle frequencies (0, 1, 2, 3, 4, 5)"
 cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+cat /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq
+cat /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq
 cat /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq
 cat /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq
 cat /sys/devices/system/cpu/cpu5/cpufreq/scaling_min_freq

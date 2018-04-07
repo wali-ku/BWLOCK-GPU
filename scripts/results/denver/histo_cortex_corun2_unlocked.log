@@ -1,0 +1,18 @@
+Resolving CUDA runtime library...
+	libcudart.so.8.0 => /usr/local/cuda-8.0/lib64/libcudart.so.8.0 (0x0000007f80db8000)
+
+IO        : 0.231510
+Kernel    : 223.071011
+ -PreScanKernel      : 41.592983
+ -PostPreMems        : 46.158451
+ -IntermediatesKernel: 42.867477
+ -MainKernel         : 45.880547
+ -FinalKernel        : 46.571512
+Copy      : 0.020586
+Driver    : 223.095765
+Compute   : 0.001023
+CPU/Kernel Overlap: 223.071011
+Timer Wall Time: 223.507797
+Pass
+Parboil parallel benchmark suite, version 0.2
+
