@@ -108,7 +108,7 @@ cd BWLOCK-GPU/scripts
 14. If everything goes alright, the following directory (*BWLOCK-GPU/scripts/figures/*) should contain all the generated figures.
 
 # Figures Reproduced from Paper
-The scripts present in this repository produce the following figures from the paper:
+By following the instructions mentioned [above](https://github.com/Skidro/BWLOCK-GPU#step-by-step-instructions), the following figures from the paper should get generated in (*BWLOCK-GPU/scripts/figures/*) directory:
 + Figure-1
 + Figure-5 (a, b, c)
 + Figure-6 (a, b, c)
