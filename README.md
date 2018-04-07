@@ -52,6 +52,7 @@ sudo bash
 ```
 
 4. Install BWLOCK++ patched kernel on board (Long Operation - ~1 Hour). All the steps required to do so are automated in this [script]( ./kernel/RUN-ME.sh). Please note that this requires an active internet connection.
+
 **\[CAUTION\]** Please note that running this script will over-write the existing kernel in the */boot/* directory on your TX-2 board!
 
 ```bash
@@ -90,6 +91,7 @@ cd scripts
 apt-get install python-matplotlib
 ```
 12. **Reboot the system**. Once the system reboots, go to the directory *BWLOCK-GPU/scripts*. Relaunch sudo shell and then put the board into maximum performance state using this [script]( ./scripts/max_perf.sh) located in *BWLOCK-GPU/scripts/* directory.
+
 **\[NOTE\]** The script (max_perf.sh) will shutdown the GUI on TX-2 board. We suggest that you switch to a TTY termianl (CTRL + ALT + <Function-Key>) before executing this script!
 
 ```bash
