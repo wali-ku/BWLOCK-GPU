@@ -2,6 +2,11 @@
 # This script manually sets the TX2's GPU and memory clock rates to a high
 # value, disables frequency scaling, puts the machine in "performance" mode,
 # and turns on the fan.
+#
+# ACKNOWLEDGMENT
+#	This script has been adapted from:
+#	https://github.com/yalue/cuda_scheduling_examiner_mirror/blob/master/scripts/TX-max_perf.sh
+
 echo "WARNING - Must Be Run Sudo"
 echo "WARNING - Use Only on TX2"
 
