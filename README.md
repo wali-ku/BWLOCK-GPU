@@ -34,51 +34,54 @@ our ECRTS-18 paper:
        * [individual_figures]( ./scripts/individual_figures)
 
 # Step-by-step Instructions
-We recommend that the TX-2 be flashed with [Jetpack-3.1](https://developer.nvidia.com/embedded/jetpack-3_1) before proceeding with the following steps. All these steps are meant to be executed on the TX-2 board.
+**\[Pre-Requisite\]** We require that the TX-2 be flashed with [Jetpack-3.1](https://developer.nvidia.com/embedded/jetpack-3_1) before proceeding with the following steps. **Please note that flashing the board will erase all data from its internal storage so please back-up any important material you have on your TX-2 board before proceeding any further**. All these steps are meant to be executed on the TX-2 board.
 
-1. Launch a bash shell. Install Git
+1. Launch a bash shell. Install Git.
 ```bash
 sudo apt-get install git
 ```
 
-2. Clone this repository
+2. Clone this repository.
 ```bash
 git clone https://github.com/Skidro/BWLOCK-GPU.git
 ```
 
-3. Launch a sudo shell
+3. Launch a sudo shell.
 ```
 sudo bash
 ```
 
-4. Install BWLOCK++ patched kernel on board (Long Operation). All the steps required to do so are automated in this [script]( ./kernel/RUN-ME.sh). Please note that this requires an active internet connection.
+4. Install BWLOCK++ patched kernel on board (Long Operation - ~1 Hour). All the steps required to do so are automated in this [script]( ./kernel/RUN-ME.sh). Please note that this requires an active internet connection.
+
+**\[CAUTION\]** Please note that running this script will over-write the existing kernel in the */boot/* directory on your TX-2 board!
+
 ```bash
 cd BWLOCK-GPU/kernel
 ./RUN-ME.sh
 ```
 
-5. Reboot the system. Go to the BWLOCK-GPU git repository
-6. Setup the benchmarks used in BWLOCK++ evaluation. This is automated by the following [script]( ./benchmarks/RUN-ME.sh). Please note that this requires an active internet connection.
+5. **Reboot the system**. Go to the BWLOCK-GPU git repository
+6. Setup the benchmarks used in BWLOCK++ evaluation. This is automated by the following [script (RUN-ME.sh)]( ./benchmarks/RUN-ME.sh) in *BWLOCK-GPU/benchmarks/* directory. Please note that this requires an active internet connection.
 ```bash
 cd benchmarks
 ./RUN-ME.sh
 cd ..
 ```
 
-7. **\[IMPORTANT\]** Set root path in [this script]( ./scripts/functions.sh). The root path is defined as the absolute path in your system where the BWLOCK-GPU repostiory is located. For example, in our test sytem, the repository is located at */home/nvidia/BWLOCK-GPU* which is set as the root path.
+7. **\[IMPORTANT\]** Set root path variable (**root_path**) in [this script (functions.sh)]( ./scripts/functions.sh) located in *BWLOCK-GPU/scripts/* directory. The root path is defined as the absolute path in your system where the BWLOCK-GPU repository is located. For example, in our test sytem, the repository is located at */home/nvidia/BWLOCK-GPU* which is set as the root path.
 
 8. Launch sudo shell
 ```bash
 sudo bash
 ```
 
-9. Build all the test materials (benchmarks and kernel module). This is automated by the following [script]( ./scripts/build_all.sh)
+9. Build all the test materials (benchmarks and kernel module). This is automated by the following [script (build_all.sh)]( ./scripts/build_all.sh) located in *BWLOCK-GPU/scripts/* directory.
 ```bash
 cd scripts
 ./build_all.sh
 ```
 
-10. Run the [sanity check experiment]( ./scripts/TEST-BWLOCK.sh) to verify that everything is correctly setup in your system. The script takes ~1-minute to complete.
+10. Run the [sanity check experiment (TEST-BWLOCK.sh)]( ./scripts/TEST-BWLOCK.sh) located in *BWLOCK-GPU/scripts/* directory; to verify that everything is correctly setup in your system. The script takes ~1-minute to complete.
 ```bash
 ./TEST-BWLOCK.sh
 ```
@@ -87,13 +90,17 @@ cd scripts
 ```bash
 apt-get install python-matplotlib
 ```
-12. **Reboot the system**. Once the system reboots, go the directory *BWLOCK-GPU/scripts*. Relaunch sudo shell and then put the board into maximum performance state using this [script]( ./scripts/max_perf.sh)
+12. **Reboot the system**. Once the system reboots, go to the directory *BWLOCK-GPU/scripts*. Relaunch sudo shell and then put the board into maximum performance state using this [script (max_perf.sh)]( ./scripts/max_perf.sh) located in *BWLOCK-GPU/scripts/* directory.
+
+**\[NOTE\]** The script (max_perf.sh) will shutdown the GUI on TX-2 board. We suggest that you switch to a TTY terminal (CTRL + ALT + \<Function-Key\>) before executing this script!
+
 ```bash
 sudo bash
+cd BWLOCK-GPU/scripts
 ./max_perf.sh
 ```
 
-13. Run the [final evaluation script]( ./scripts/RUN-ME.sh) which runs all the experiments from our paper (Protecting Real-Time GPU Kernels on Integrated CPU-GPU SoC Platforms). This will take significant amount of time (Approximately 2 to 3 hours).
+13. Run the [final evaluation script (RUN-ME.sh)]( ./scripts/RUN-ME.sh) located in *BWLOCK-GPU/scripts/* directory; which runs all the experiments from our paper (Protecting Real-Time GPU Kernels on Integrated CPU-GPU SoC Platforms). This will take significant amount of time (Approximately 2 to 3 hours).
 ```bash
 ./RUN-ME.sh
 ```
