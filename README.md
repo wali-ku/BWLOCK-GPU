@@ -58,7 +58,7 @@ cd BWLOCK-GPU/kernel
 ```
 
 5. Reboot the system. Go to the BWLOCK-GPU git repository
-6. Setup the benchmarks used in BWLOCK++ evaluation. This is automated by the following script [script]( ./benchmarks/RUN-ME.sh). Please note that this requires an active internet connection.
+6. Setup the benchmarks used in BWLOCK++ evaluation. This is automated by the following [script]( ./benchmarks/RUN-ME.sh). Please note that this requires an active internet connection.
 ```bash
 cd benchmarks
 ./RUN-ME.sh
