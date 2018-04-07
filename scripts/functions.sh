@@ -161,6 +161,26 @@ execute_corunners () {
 	fi
 }
 
+# Execute co-runners on denver cores
+# $1: Number of corunners to execute
+execute_denver_corunners () {
+	if [ $1 -gt 0 ]; then
+		pushd . &> /dev/null
+		cd ${corun_path}
+		core_limit=${1}
+		if [ "$1" == "1" ]; then
+			echo -e "${GRN}[STATUS] Starting ${1}-'bandwidth' co-runner on Core-1${RED}"
+		else
+			echo -e "${GRN}[STATUS] Starting ${1}-'bandwidth' co-runners on Core-1 to Core-${core_limit}${RED}"
+		fi
+		for core in `seq 1 ${core_limit}`; do
+			./bandwidth -c ${core} -t 10000 -m 4096 -a write &> /dev/null&
+		done
+		sleep 2
+		popd &> /dev/null
+	fi
+}
+
 # Execute specified number of BANDWIDTH corunners on Core-3 to Core-5
 # Each core executes two instanes of BANDWIDTH, one of which is configured to
 # stress memory and the other is configured to stress CPU
@@ -211,6 +231,50 @@ cleanup_bwlock () {
 	rmmod bwlockmod &> /dev/null
 	reset_log
 	sleep 2
+}
+
+# Execute the specified parboil benchmark with the given parameters
+# $1 : Number of corunners (ON DENVER CORES)
+# $2 : Benchmark name
+# $3 : Build type (CUDA or CUDA_BASE)
+# $4 : Dataset
+# $5 : Scenario
+# $6 : Execute with lock if specified
+execute_parboil_denver () {
+	mkdir -p ${results_path}/$5
+	execute_denver_corunners $1
+
+	pushd . &> /dev/null
+	cd ${parboil_path}
+	if [ "$6" == "LOCKED" ]; then
+		LD_PRELOAD=${dynamic_linker_path}/custom_cuda.so chrt -f 5 taskset -c 0 ./parboil run $2 $3 $4 &> ${results_path}/$5/${2}_denver_corun${1}_locked.log
+	else
+		chrt -f 5 taskset -c 0 ./parboil run $2 $3 $4 &> ${results_path}/$5/${2}_denver_corun${1}_unlocked.log
+	fi
+	popd &> /dev/null
+	stop_corunners
+}
+
+# Execute the specified parboil benchmark with the given parameters
+# $1 : Number of corunners
+# $2 : Benchmark name
+# $3 : Build type (CUDA or CUDA_BASE)
+# $4 : Dataset
+# $5 : Scenario
+# $6 : Execute with lock if specified
+execute_parboil_cortex () {
+	mkdir -p ${results_path}/$5
+	execute_corunners $1
+
+	pushd . &> /dev/null
+	cd ${parboil_path}
+	if [ "$6" == "LOCKED" ]; then
+		LD_PRELOAD=${dynamic_linker_path}/custom_cuda.so chrt -f 5 taskset -c 0 ./parboil run $2 $3 $4 &> ${results_path}/$5/${2}_cortex_corun${1}_locked.log
+	else
+		chrt -f 5 taskset -c 0 ./parboil run $2 $3 $4 &> ${results_path}/$5/${2}_cortex_corun${1}_unlocked.log
+	fi
+	popd &> /dev/null
+	stop_corunners
 }
 
 # Execute the specified parboil benchmark with the given parameters
