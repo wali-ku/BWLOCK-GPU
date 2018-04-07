@@ -262,7 +262,7 @@ execute_parboil_denver () {
 # $4 : Dataset
 # $5 : Scenario
 # $6 : Execute with lock if specified
-execute_parboil () {
+execute_parboil_cortex () {
 	mkdir -p ${results_path}/$5
 	execute_corunners $1
 
@@ -272,6 +272,28 @@ execute_parboil () {
 		LD_PRELOAD=${dynamic_linker_path}/custom_cuda.so chrt -f 5 taskset -c 0 ./parboil run $2 $3 $4 &> ${results_path}/$5/${2}_cortex_corun${1}_locked.log
 	else
 		chrt -f 5 taskset -c 0 ./parboil run $2 $3 $4 &> ${results_path}/$5/${2}_cortex_corun${1}_unlocked.log
+	fi
+	popd &> /dev/null
+	stop_corunners
+}
+
+# Execute the specified parboil benchmark with the given parameters
+# $1 : Number of corunners
+# $2 : Benchmark name
+# $3 : Build type (CUDA or CUDA_BASE)
+# $4 : Dataset
+# $5 : Scenario
+# $6 : Execute with lock if specified
+execute_parboil () {
+	mkdir -p ${results_path}/$5
+	execute_corunners $1
+
+	pushd . &> /dev/null
+	cd ${parboil_path}
+	if [ "$6" == "LOCKED" ]; then
+		LD_PRELOAD=${dynamic_linker_path}/custom_cuda.so chrt -f 5 taskset -c 0 ./parboil run $2 $3 $4 &> ${results_path}/$5/${2}_corun${1}_locked.log
+	else
+		chrt -f 5 taskset -c 0 ./parboil run $2 $3 $4 &> ${results_path}/$5/${2}_corun${1}_unlocked.log
 	fi
 	popd &> /dev/null
 	stop_corunners

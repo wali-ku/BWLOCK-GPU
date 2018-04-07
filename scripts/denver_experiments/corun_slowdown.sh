@@ -7,13 +7,13 @@
 scenario=denver
 
 echo -e "${YLW}[STATUS] Executing HISTO with 2-CortexA57 corunners${NCL}"
-execute_parboil 2 histo cuda large ${scenario} UNLOCKED
+execute_parboil_cortex 2 histo cuda large ${scenario} UNLOCKED
 echo -e "${YLW}[STATUS] Executing HISTO with 2-Denver corunners${NCL}"
 execute_parboil_denver 2 histo cuda large ${scenario} UNLOCKED
 
 setup_bwlock 512 0
 echo -e "${YLW}[STATUS] Executing HISTO with 2-CortexA57 corunners with BWLOCK++${NCL}"
-execute_parboil 2 histo cuda large ${scenario} LOCKED
+execute_parboil_cortex 2 histo cuda large ${scenario} LOCKED
 echo -e "${YLW}[STATUS] Executing HISTO with 2-Denver corunners with BWLOCK++${NCL}"
 execute_parboil_denver 2 histo cuda large ${scenario} LOCKED
 cleanup_bwlock
