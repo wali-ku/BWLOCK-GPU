@@ -90,7 +90,7 @@ cd scripts
 ```bash
 apt-get install python-matplotlib
 ```
-12. **Reboot the system**. Once the system reboots, go to the directory *BWLOCK-GPU/scripts*. Relaunch sudo shell and then put the board into maximum performance state using this [script]( ./scripts/max_perf.sh) located in *BWLOCK-GPU/scripts/* directory.
+12. **Reboot the system**. Once the system reboots, go to the directory *BWLOCK-GPU/scripts*. Relaunch sudo shell and then put the board into maximum performance state using this [script (max_perf.sh)]( ./scripts/max_perf.sh) located in *BWLOCK-GPU/scripts/* directory.
 
 **\[NOTE\]** The script (max_perf.sh) will shutdown the GUI on TX-2 board. We suggest that you switch to a TTY terminal (CTRL + ALT + \<Function-Key\>) before executing this script!
 
