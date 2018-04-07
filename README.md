@@ -72,7 +72,7 @@ cd ..
 sudo bash
 ```
 
-9. Build all the test materials (benchmarks and kernel module). This is automated by the following script [script]( ./scripts/build_all.sh)
+9. Build all the test materials (benchmarks and kernel module). This is automated by the following [script]( ./scripts/build_all.sh)
 ```bash
 cd scripts
 ./build_all.sh
