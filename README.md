@@ -51,7 +51,7 @@ git clone https://github.com/Skidro/BWLOCK-GPU.git
 sudo bash
 ```
 
-4. Install BWLOCK++ patched kernel on board (Long Operation - ~1 Hour). All the steps required to do so are automated in this [script]( ./kernel/RUN-ME.sh). Please note that this requires an active internet connection.
+4. Install BWLOCK++ patched kernel on board (Long Operation - ~1 Hour). All the steps required to do so are automated in this [script (RUN-ME.sh)]( ./kernel/RUN-ME.sh) located in *BWLOCK-GPU/kernel/* directory. Please note that this requires an active internet connection.
 
 **\[CAUTION\]** Please note that running this script will over-write the existing kernel in the */boot/* directory on your TX-2 board!
 
@@ -105,11 +105,9 @@ cd BWLOCK-GPU/scripts
 ./RUN-ME.sh
 ```
 
-14. If everything goes alright, the following directory (BWLOCK-GPU/scripts/figures) should contain all the generated figures.
+14. If everything goes alright, the following directory (*BWLOCK-GPU/scripts/figures/*) should contain all the generated figures.
 
-# Experiments
-**NOTE: Before running the experiments, make sure that the device is in max-performance state**
-
+# Figures Reproduced from Paper
 The scripts present in this repository produce the following figures from the paper:
 + Figure-1
 + Figure-5 (a, b, c)
