@@ -87,7 +87,7 @@ cd scripts
 ```bash
 apt-get install python-matplotlib
 ```
-12. **Reboot the system**. Once the system reboots, go the directory containing *BWLOCK-GPU/scripts*. Relaunch sudo shell and then put the board into maximum performance state using this script [script]( ./scripts/max_perf.sh)
+12. **Reboot the system**. Once the system reboots, go the directory *BWLOCK-GPU/scripts*. Relaunch sudo shell and then put the board into maximum performance state using this [script]( ./scripts/max_perf.sh)
 ```bash
 sudo bash
 ./max_perf.sh
@@ -98,7 +98,7 @@ sudo bash
 ./RUN-ME.sh
 ```
 
-14. If everything goes alright, the following directory (scripts/figures) should contain all the generated figures.
+14. If everything goes alright, the following directory (BWLOCK-GPU/scripts/figures) should contain all the generated figures.
 
 # Experiments
 **NOTE: Before running the experiments, make sure that the device is in max-performance state**
