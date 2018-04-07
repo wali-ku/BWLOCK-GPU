@@ -23,6 +23,8 @@ if [ "$1" == "run_the_experiment" ]; then
 			echo 1 > /sys/kernel/debug/bwlock/reset_throttle_time
 			sleep 1
 			cat /sys/kernel/debug/bwlock/system_throttle_time &> results/${scenario}/${name}_tfs${tfs_factor}x.trace
+			echo 1 > /sys/kernel/debug/bwlock/reset_throttle_time
+			sleep 1
 		done
 	done
 else
