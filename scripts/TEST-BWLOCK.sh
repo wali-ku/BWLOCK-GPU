@@ -23,16 +23,14 @@ sleep 10
 stop_corunners
 
 # Extract total system throttle time from BWLOCK++ module
-echo 1 > /sys/kernel/debug/bwlock/reset_throttle_time
-sleep 1
-total_throttle_time=`cat /sys/kernel/debug/bwlock/system_throttle_time`
+total_throttle_time=`cat /sys/kernel/debug/bwlock/reset_and_show_throttle_time | tr -dc '0-9'`
 
 # Remove kernel module
 cleanup_bwlock
 rm -f critical
 
 if [ "${total_throttle_time}" != "0" ]; then
-	echo -e "${YLW}[STATUS] Test passed. System is ready for BWLOCK++${NCL}"
+	printf "${YLW}[STATUS] Test passed <system was throttled for: %12lld nsec>. System is ready for BWLOCK++${NCL}\n" "${total_throttle_time}"
 else
 	echo -e "${RED}[ERROR] Test failed. System is not ready for BWLOCK++${NCL}"
 fi

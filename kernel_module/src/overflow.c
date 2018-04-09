@@ -120,7 +120,11 @@ int throttle_thread (void *arg)
 
 		/* Mark the end of throttle time */
 		delta_time = (u64) (ktime_get ().tv64 - cinfo->core_throttle_start_mark.tv64);
+
+		spin_lock (&cinfo->core_lock);
 		cinfo->core_throttle_duration += delta_time;
+		spin_unlock (&cinfo->core_lock);
+
 		cinfo->core_throttle_period_cnt++;
 
 		/* We should have a throttle thread */

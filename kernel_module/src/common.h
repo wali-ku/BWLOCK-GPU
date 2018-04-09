@@ -39,7 +39,7 @@
 #define DEBUG_OVERFLOW(x)
 #define DEBUG_TIME(x)		x
 #define DEBUG_INTERRUPT(x)
-#define DEBUG_MONITOR(x)	x
+#define DEBUG_MONITOR(x)
 
 /* Define common multipliers */
 #define K1			1000ULL
@@ -57,6 +57,7 @@ struct perfmod_info {
 
 struct core_info {
 	/* Per core statistics */
+	spinlock_t		core_lock;
 	ktime_t			core_throttle_start_mark;
 	u64			core_throttle_duration;
 	u64			core_throttle_period_cnt;

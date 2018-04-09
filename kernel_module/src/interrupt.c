@@ -8,8 +8,6 @@ extern struct core_info __percpu	*core_info;
 /* Define initial event limits */
 extern u32				sysctl_llc_maxperf_events;
 extern u32				sysctl_llc_throttle_events;
-extern u32				sysdbg_reset_throttle_time;
-extern u64				sysdbg_total_throttle_time;
 
 /*
  * period_timer_callback
@@ -19,7 +17,7 @@ extern u64				sysdbg_total_throttle_time;
 enum hrtimer_restart periodic_timer_callback (struct hrtimer *timer)
 {
 	struct core_info *cinfo = this_cpu_ptr (core_info);
-	int bwlock_core_cnt, over_run_cnt, i;
+	int bwlock_core_cnt, over_run_cnt;
 
 	/* Forward the hrtimer and get the number of overruns */
 	over_run_cnt = hrtimer_forward_now (timer, cinfo->period_in_ktime);
@@ -59,16 +57,6 @@ enum hrtimer_restart periodic_timer_callback (struct hrtimer *timer)
 		DEBUG_MONITOR (trace_printk ("[MONITOR] Task: %10s | V-Time: %10lld\n",
 					      current->comm,
 					      current->se.vruntime));
-	}
-
-	if (smp_processor_id () == 0 && sysdbg_reset_throttle_time) {
-		sysdbg_total_throttle_time = 0;
-		for_each_online_cpu (i) {
-			struct core_info *cinfo = per_cpu_ptr (core_info, i);
-			sysdbg_total_throttle_time += cinfo->core_throttle_duration;
-			cinfo->core_throttle_duration = 0;
-		}
-		sysdbg_reset_throttle_time = 0;
 	}
 
 	smp_mb ();

@@ -1,0 +1,11 @@
+benchmarks/IsolBench/
+benchmarks/parboil/
+kernel/linux/
+kernel_module/.tmp_versions/
+kernel_module/exe/
+*.o
+*.ko
+*.cmd
+*.mod.c
+*.order
+*.symvers

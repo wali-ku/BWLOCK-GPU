@@ -222,15 +222,12 @@ setup_bwlock () {
 	echo -e "${GRN}[STATUS] Setting up BWLOCK++ with ${mbps}-MBPS corun threshold and throttle factor = ${2}$RED"
 	echo $1 > /sys/kernel/debug/bwlock/corun_threshold_events
 	echo $2 > /sys/kernel/debug/bwlock/tfs_throttle_factor
-	sleep 2
 	popd &> /dev/null
 }
 
 # Remove bandwidth lock kernel module. Copy over the trace data and reset trace
 cleanup_bwlock () {
 	rmmod bwlockmod &> /dev/null
-	reset_log
-	sleep 2
 }
 
 # Execute the specified parboil benchmark with the given parameters

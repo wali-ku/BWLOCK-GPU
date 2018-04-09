@@ -43,8 +43,6 @@ struct dentry			*bwlockmod_dir;
    bandwidth intensive non-RT thread should be punished in the presence
    of bandwidth locked threads */
 u32				sysctl_tfs_throttle_factor	= 0;
-u32				sysdbg_reset_throttle_time 	= 0;
-u64				sysdbg_total_throttle_time 	= 0;
 
 /**************************************************************************
  * Function Definitions
@@ -107,6 +105,7 @@ int lazy_init_thread (void *arg)
 	cinfo->core_throttle_duration = 0;
 	cinfo->core_throttle_period_cnt = 0;
 	cinfo->throttle_core = 0;
+	spin_lock_init (&cinfo->core_lock);
 	cinfo->budget = convert_mb_to_events (sysctl_maxperf_bw_mb);
 	init_waitqueue_head (&cinfo->throttle_evt);
 	init_irq_work (&cinfo->pending, perfmod_process_overflow);
@@ -183,20 +182,20 @@ void cleanup_module (void)
 		kthread_stop (cinfo->throttle_thread);
 
 		/* Before leaving, update the total system throttle time */
-		global->system_throttle_duration += cinfo->core_throttle_duration;
 		global->system_throttle_period_cnt += cinfo->core_throttle_period_cnt;
+		global->system_throttle_duration += cinfo->core_throttle_duration;
 
 		/* Print this core's throttle times to trace buffer */
-		DEBUG_TIME(trace_printk("[TIME] Core-%d Throttle Duration : %llu ms\n", i, div64_u64 (cinfo->core_throttle_duration, M1)));
-		DEBUG_TIME(trace_printk("[TIME] Core-%d Throttle Periods  : %llu\n", i, cinfo->core_throttle_period_cnt));
+		DEBUG_TIME(trace_printk("[TIME] Core-%d Throttle Duration       <SINCE LAST RESET> : %llu ms\n", i, div64_u64 (cinfo->core_throttle_duration, M1)));
+		DEBUG_TIME(trace_printk("[TIME] Core-%d Throttle Periods        <Since Beginning > : %llu\n", i, cinfo->core_throttle_period_cnt));
 	}
 
 	/* Free dynamically allocated data inside perfmod structure */
 	free_percpu (core_info);
 
 	/* Print cleanup message to trace buffer */
-	DEBUG_TIME(trace_printk ("[TIME] Total System Throttle Duration : %llu ms\n", div64_u64 (global->system_throttle_duration, M1)));
-	DEBUG_TIME(trace_printk ("[TIME] Total System Throttle Periods : %llu\n", global->system_throttle_period_cnt));
+	DEBUG_TIME(trace_printk ("[TIME] Total System Throttle Duration <Since Beginning > : %llu ms\n", div64_u64 (global->system_throttle_duration, M1)));
+	DEBUG_TIME(trace_printk ("[TIME] Total System Throttle Periods  <Since Beginning > : %llu\n", global->system_throttle_period_cnt));
 
 	/* Remove debugfs directories */
 	debugfs_remove_recursive (bwlockmod_dir);

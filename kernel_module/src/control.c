@@ -1,10 +1,43 @@
 #include "common.h"
 
-extern u32		sysctl_llc_throttle_events;
-extern u32		sysctl_tfs_throttle_factor;
-extern u32		sysdbg_reset_throttle_time;
-extern u64		sysdbg_total_throttle_time;
-extern struct dentry 	*bwlockmod_dir;
+extern struct core_info __percpu	*core_info;
+extern struct perfmod_info		perfmod_info;
+extern struct dentry 			*bwlockmod_dir;
+extern u32				sysctl_llc_throttle_events;
+extern u32				sysctl_tfs_throttle_factor;
+
+static int bwlock_throttle_open (struct inode*, struct file*);
+static int bwlock_throttle_show (struct seq_file*, void *);
+
+static const struct file_operations bwlock_throttle_fops = {
+	.open		= bwlock_throttle_open,
+	.read		= seq_read,
+	.llseek		= seq_lseek,
+	.release	= single_release,
+};
+
+static int bwlock_throttle_open (struct inode *inode, struct file *filp)
+{
+	return single_open (filp, bwlock_throttle_show, NULL);
+}
+
+static int bwlock_throttle_show (struct seq_file *m, void *v)
+{
+	struct perfmod_info *global = &perfmod_info;
+	u64 partial_system_throttle_time = 0;
+	int i;
+	for_each_online_cpu (i) {
+		struct core_info *cinfo = per_cpu_ptr (core_info, i);
+		spin_lock (&cinfo->core_lock);
+		partial_system_throttle_time += cinfo->core_throttle_duration;
+		cinfo->core_throttle_duration = 0;
+		spin_unlock (&cinfo->core_lock);
+	}
+
+	global->system_throttle_duration += partial_system_throttle_time;
+	seq_printf (m, "System Throttle Time (Since Last Check): %lld\n", partial_system_throttle_time);
+	return 0;
+}
 
 int init_bwlock_controlfs (void)
 {
@@ -24,11 +57,7 @@ int init_bwlock_controlfs (void)
 	if (!debugfs_create_u32 ("tfs_throttle_factor", mode, bwlockmod_dir, &sysctl_tfs_throttle_factor))
 		goto fail;
 
-	/* Create throttling related parameters */
-	if (!debugfs_create_u32 ("reset_throttle_time", mode, bwlockmod_dir, &sysdbg_reset_throttle_time))
-		goto fail;
-
-	if (!debugfs_create_u64 ("system_throttle_time", mode, bwlockmod_dir, &sysdbg_total_throttle_time))
+	if (!debugfs_create_file("reset_and_show_throttle_time", 0444, bwlockmod_dir, NULL, &bwlock_throttle_fops))
 		goto fail;
 
 	return 0;
